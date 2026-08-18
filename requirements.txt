@@ -1,0 +1,42 @@
+# Core Data Processing
+pandas>=1.5.0
+numpy>=1.23.0
+
+# Machine Learning
+scikit-learn>=1.2.0
+
+# Visualization
+matplotlib>=3.6.0
+seaborn>=0.12.0
+
+# Model Persistence
+joblib>=1.2.0
+
+# Jupyter Notebooks
+jupyter>=1.0.0
+ipykernel>=6.19.0
+
+# Optional: For Week 4-5 Implementation
+# Uncomment when needed:
+
+# AI/LLM Integration (Week 4)
+openai>=1.0.0                      # For OpenAI GPT
+google-generativeai>=0.8.0         # For Google Gemini
+# anthropic>=0.7.0                 # For Claude
+# transformers>=4.35.0             # For local LLMs
+# torch>=2.0.0                     # Required for transformers
+
+# Dashboard (Week 5)
+streamlit>=1.28.0                  # Interactive dashboard
+# plotly>=5.17.0                   # Interactive plots
+
+# API Development (Optional)
+# fastapi>=0.104.0                 # REST API
+# uvicorn>=0.24.0                  # ASGI server
+# pydantic>=2.5.0                  # Data validation
+
+# Additional Utilities
+python-dotenv>=1.0.0               # Environment variables
+psutil>=5.9.0                      # Live network metadata collection
+# requests>=2.31.0                 # HTTP requests
+# tqdm>=4.66.0                     # Progress bars

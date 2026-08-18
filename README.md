@@ -8,11 +8,11 @@ This project delivers an end-to-end IDS pipeline that can run on historical or l
 
 Core capabilities:
 
-* Hybrid detection using ensemble confidence scoring
-* Incident-level correlation of sample alerts into grouped events
-* LLM-assisted reasoning with automatic template fallback
-* HoneyBadger response playbooks by severity
-* Streamlit dashboard with exportable incident artifacts
+- Hybrid detection using ensemble confidence scoring
+- Incident-level correlation of sample alerts into grouped events
+- LLM-assisted reasoning with automatic template fallback
+- HoneyBadger response playbooks by severity
+- Streamlit dashboard with exportable incident artifacts
 
 ## Current Architecture
 
@@ -24,19 +24,19 @@ The implemented runtime architecture is a 5-stage pipeline:
 4. Response Playbook (HoneyBadger)
 5. Dashboard and Export Layer
 
-## Hybrid Detection Model
+### Hybrid Detection Model
 
 Implemented detector components:
 
-* LSTM proxy (MLP with temporal features)
-* CNN proxy (MLP feature-pattern learner)
-* Random Forest classifier
-* Autoencoder-style reconstruction model for anomaly score
+- LSTM proxy (MLP with temporal features)
+- CNN proxy (MLP feature-pattern learner)
+- Random Forest classifier
+- Autoencoder-style reconstruction model for anomaly score
 
 Scoring equations:
 
-* `Phybrid = 0.35 * PLSTM + 0.30 * PCNN + 0.35 * PRF`
-* `Confidence = 0.72 * Phybrid + 0.28 * Anomaly`
+- Phybrid = 0.35 * PLSTM + 0.30 * PCNN + 0.35 * PRF
+- Confidence = 0.72 * Phybrid + 0.28 * Anomaly
 
 ## Repository Structure
 
@@ -66,14 +66,12 @@ intrusion_project/
 
 Supported sources:
 
-* UNSW-NB15
-* CIC-IDS2017 (CSV exports)
+- UNSW-NB15
+- CIC-IDS2017 (CSV exports)
 
-Combined processing is handled by `multi_dataset_processor.py` and produces:
+Combined processing is handled by multi_dataset_processor.py and produces:
 
-```text
-data/processed/multi_dataset_combined.csv
-```
+- data/processed/multi_dataset_combined.csv
 
 ## Quick Start
 
@@ -89,10 +87,10 @@ pip install -r requirements.txt
 copy .env.example .env
 ```
 
-Set one or both providers in `.env`:
+Set one or both providers in .env:
 
-* `OPENAI_API_KEY`
-* `GEMINI_API_KEY` (or `GOOGLE_API_KEY`)
+- OPENAI_API_KEY
+- GEMINI_API_KEY (or GOOGLE_API_KEY)
 
 ### 3. Optional: build combined dataset
 
@@ -114,12 +112,12 @@ python -m streamlit run streamlit_dashboard.py
 
 ## Streamlit Dashboard Features
 
-* Historical CSV mode and real-time network mode
-* Fast Mode toggle for lower-latency inference
-* Cached preprocessing artifacts to speed repeated runs
-* Session result cache for identical parameter reruns
-* Heavy visual sections collapsed by default for faster first render
-* JSON and CSV incident export
+- Historical CSV mode and real-time network mode
+- Fast Mode toggle for lower-latency inference
+- Cached preprocessing artifacts to speed repeated runs
+- Session result cache for identical parameter reruns
+- Heavy visual sections collapsed by default for faster first render
+- JSON and CSV incident export
 
 ## LLM Reasoning Behavior
 
@@ -127,43 +125,43 @@ The Reasoning Layer supports OpenAI and Gemini providers.
 
 Expected behavior:
 
-* `llm_used: yes` when a provider call succeeds
-* `llm_used: no` when fallback template reasoning is used
+- llm_used: yes when a provider call succeeds
+- llm_used: no when fallback template reasoning is used
 
 Fallback conditions include:
 
-* Missing API keys
-* Provider quota exhaustion or API errors
-* Unsupported model identifier
+- Missing API keys
+- Provider quota exhaustion or API errors
+- Unsupported model identifier
 
 Notes:
 
-* In auto mode, OpenAI is primary when using GPT model names.
-* Gemini fallback is available when Gemini key and valid model are configured.
+- In auto mode, OpenAI is primary when using GPT model names.
+- Gemini fallback is available when Gemini key and valid model are configured.
 
 ## Performance Optimizations Implemented
 
-* Feature-space reduction by excluding high-cardinality identity columns from training
-* NaN and inf sanitization during dataset preparation
-* float32 conversion for feature matrices
-* Fast Mode detector configuration (smaller model sizes)
-* On-disk preprocessed cache in `data/processed/cache`
-* Streamlit-side result caching and optional cache clear
+- Feature-space reduction by excluding high-cardinality identity columns from training
+- NaN and inf sanitization during dataset preparation
+- float32 conversion for feature matrices
+- Fast Mode detector configuration (smaller model sizes)
+- On-disk preprocessed cache in data/processed/cache
+- Streamlit-side result caching and optional cache clear
 
 ## Troubleshooting
 
 ### Streamlit starts but analysis appears slow
 
-* Enable Fast Mode in sidebar
-* Lower sample size (for example 2000 to 4000)
-* Use Clear cached results only when you need a fresh run
+- Enable Fast Mode in sidebar
+- Lower sample size (for example 2000 to 4000)
+- Use Clear cached results only when you need a fresh run
 
-### LLM card shows `llm_used: no`
+### LLM card shows llm_used: no
 
-* Verify API key exists in `.env`
-* Ensure selected provider matches configured key
-* Check model name is supported
-* Clear cached results and rerun
+- Verify API key exists in .env
+- Ensure selected provider matches configured key
+- Check model name is supported
+- Clear cached results and rerun
 
 ### Model errors about NaN values
 
@@ -171,19 +169,20 @@ This is handled in current preprocessing logic. If seen again, regenerate the co
 
 ## Security Notes
 
-* Never commit `.env` to source control
-* Rotate API keys if exposed in logs, screenshots, or chat
-* Keep raw and processed datasets under local trusted storage
+- Never commit .env to source control
+- Rotate API keys if exposed in logs, screenshots, or chat
+- Keep raw and processed datasets under local trusted storage
 
 ## Tech Stack
 
-* Python, Pandas, NumPy
-* scikit-learn
-* Streamlit
-* Matplotlib, Seaborn
-* python-dotenv
-* OpenAI SDK and Google Generative AI SDK
+- Python, Pandas, NumPy
+- scikit-learn
+- Streamlit
+- Matplotlib, Seaborn
+- python-dotenv
+- OpenAI SDK and Google Generative AI SDK
 
 ## License and Use
 
 This repository is currently configured as an academic and research-style implementation. Add an explicit license file if you plan broader public distribution.
+*Structured, Complete, Production-Ready*
